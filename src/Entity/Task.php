@@ -59,7 +59,6 @@ class Task
 
     public function __construct()
     {
-        $this->assigned = new ArrayCollection();
         $this->assignements = new ArrayCollection();
     }
 

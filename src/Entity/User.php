@@ -67,7 +67,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct()
     {
-        $this->tasks = new ArrayCollection();
         $this->projects = new ArrayCollection();
         $this->participates = new ArrayCollection();
         $this->assignements = new ArrayCollection();
