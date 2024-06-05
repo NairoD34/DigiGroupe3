@@ -9,34 +9,34 @@ security:
             entity:
                 class: App\Entity\User
                 property: email
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        admin:
-            pattern: ^/admin
+        #admin:
+        #    pattern: ^/admin
+        #    lazy: true
+        #    provider: app_user_provider
+        #    custom_authenticator: App\Security\AppAdminAuthenticator
+        #    logout:
+        #        path: logout
+        #        target: login
+        #    remember_me:
+        #        secret: '%kernel.secret%'
+        #        lifetime: 604800
+        #        path: /
+        main:
             lazy: true
             provider: app_user_provider
             custom_authenticator: App\Security\AppAdminAuthenticator
             logout:
-                path: logout
+                path: /logout
                 target: login
             remember_me:
                 secret: '%kernel.secret%'
                 lifetime: 604800
                 path: /
-        main:
-            lazy: true
-            provider: app_user_provider
-            form_login: 
-                login_path: login
-                check_path: login
-                enable_csrf: true
-                default_target_path: user_dashboard
-            logout:
-                path: logout
-                # where to redirect after logout
-                # target: app_any_route
 
            
             # activate different ways to authenticate

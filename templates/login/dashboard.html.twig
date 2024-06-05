@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block main %}
+    <h2>{{ title }}</h2>
+    Connecté en tant que : <strong>{{ user.email }}</strong>,  <a href="{{ path('logout') }}">Logout</a>
+
+{% endblock %}
