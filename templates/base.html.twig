@@ -12,6 +12,13 @@
         {% endblock %}
     </head>
     <body>
+        <header>
+            {% block nav %}
+                <a href="{{ path('dashboard') }}">Dashboard</a>
+                <a href="{{ path('register') }}">Inscription</a>
+                <a href="{{ path('logout') }}">Deconnexion</a>
+            {% endblock %}
+        </header>
         {% block main %}{% endblock %}
     </body>
 </html>

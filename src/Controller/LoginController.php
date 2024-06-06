@@ -74,20 +74,53 @@ class LoginController extends AbstractController
     public function register (
         Request $request,
         FormHandlerService $formHandler,
-        PasswordHasherService $pwdHasher,
-        EntityManagerInterface $em,
     ): Response
     {
         $user = new User;
+        // TODO : REFACTO EN SERVICE !! -> Lilya
+        //$form = $this->createForm(UserFormType::class, $user);
+        //$form->handleRequest($request);
+        //if ($form->isSubmitted() && $form->isValid()) {
+        //    $em->persist($pwdHasher->userHashPassword($user));
+        //    $em->flush();
+        //    return $this->redirectToRoute('login');
+        //}
         $form = $this->createForm(UserFormType::class, $user);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em->persist($pwdHasher->userHashPassword($user));
-            $em->flush();
+        if ($formHandler->handleFormHashed($form, $request, $user, true)){
             return $this->redirectToRoute('login');
         }
         return $this->render('login/register.html.twig', [
             'title' => 'Inscription',
+            'form' => $form,
+        ]);
+    }
+
+    #[Route(
+        path: '/editUser/{id}',
+        name: 'editUser',
+        methods: ['GET', 'POST'],
+    )]
+    public function editUser(
+        Request $request,
+        FormHandlerService $formHandler,
+        PasswordHasherService $pwdHasher,
+        Security $security,
+        EntityManagerInterface $em,
+        User $user,
+    ): Response
+    {
+        if (($user = $security->getUser()) === null) {
+            return $this->redirectToRoute('login');
+        }
+        $form = $this->createForm(UserFormType::class, $user, ['user' => $user]);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($pwdHasher->userHashPassword($user));
+            $em->flush();
+            return $this->redirectToRoute('dashboard');
+        }
+        return $this->render('login/register.html.twig', [
+            'title' => 'Modifier un utilisateur',
             'form' => $form,
         ]);
     }
