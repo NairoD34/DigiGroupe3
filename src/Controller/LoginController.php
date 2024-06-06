@@ -24,10 +24,6 @@ class LoginController extends AbstractController
         AuthenticationUtils $authenticationUtils
     ): Response
      {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
-
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
@@ -50,23 +46,6 @@ class LoginController extends AbstractController
     }
 
     #[Route(
-        path: '/dashboard',
-        name: 'dashboard',
-        methods: ['GET'],
-    )]
-    public function dashboard(Security $security) : Response
-    {
-        if ($user = $security->getUser() === null) {
-            return $this->redirectToRoute('login');
-        }
-        $user = $this->getUser();
-        return $this->render('login/dashboard.html.twig', [
-            'title' => 'Dashboard',
-            'user' => $user,
-        ]);
-    }
-
-    #[Route(
         path: '/register',
         name: 'register',
         methods: ['GET', 'POST'],
@@ -77,50 +56,12 @@ class LoginController extends AbstractController
     ): Response
     {
         $user = new User;
-        // TODO : REFACTO EN SERVICE !! -> Lilya
-        //$form = $this->createForm(UserFormType::class, $user);
-        //$form->handleRequest($request);
-        //if ($form->isSubmitted() && $form->isValid()) {
-        //    $em->persist($pwdHasher->userHashPassword($user));
-        //    $em->flush();
-        //    return $this->redirectToRoute('login');
-        //}
         $form = $this->createForm(UserFormType::class, $user);
         if ($formHandler->handleFormHashed($form, $request, $user, true)){
             return $this->redirectToRoute('login');
         }
         return $this->render('login/register.html.twig', [
             'title' => 'Inscription',
-            'form' => $form,
-        ]);
-    }
-
-    #[Route(
-        path: '/editUser/{id}',
-        name: 'editUser',
-        methods: ['GET', 'POST'],
-    )]
-    public function editUser(
-        Request $request,
-        FormHandlerService $formHandler,
-        PasswordHasherService $pwdHasher,
-        Security $security,
-        EntityManagerInterface $em,
-        User $user,
-    ): Response
-    {
-        if (($user = $security->getUser()) === null) {
-            return $this->redirectToRoute('login');
-        }
-        $form = $this->createForm(UserFormType::class, $user, ['user' => $user]);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em->persist($pwdHasher->userHashPassword($user));
-            $em->flush();
-            return $this->redirectToRoute('dashboard');
-        }
-        return $this->render('login/register.html.twig', [
-            'title' => 'Modifier un utilisateur',
             'form' => $form,
         ]);
     }
