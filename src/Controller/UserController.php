@@ -2,7 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Form\UserFormType;
 use App\Services\FormHandlerService;
+use App\Services\PasswordHasherService;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
@@ -46,23 +50,54 @@ class UserController extends AbstractController
         name: 'profile',
         methods: ['GET'],
     )]
-    public function profile(): Response
+    public function profile(
+        Security $security,
+    ): Response
     {
+        $user = $security->getUser();
+        if ( $user === null ) {
+            return $this->redirectToRoute('/');
+        }
         return $this->render('user/profile.html.twig', [
-
+            'title' => 'Mon profil',
+            'user' => $user,
         ]);
     }
 
     #[Route(
-        path: 'editUser/{id}',
-        name: 'editUser',
+        path: 'editProfile/{id}',
+        name: 'editProfile',
         methods: ['GET', 'POST'],
     )]
-    public function editUser(
+    public function editProfile(
         Request $request,
         FormHandlerService $formHandler,
-    )
+        Security $security,
+        User $entity,
+        EntityManagerInterface $em,
+        PasswordHasherService $passwordHasher,
+    ) : Response
     {
+        $user = $security->getUser();
+        if ($user === null ){
+            return $this->redirectToRoute('/');
+        }
+        // TODO : Revoir comment utiliser un service pour hash le mdp
+        $form = $this->createForm(UserFormType::class, $user);
+        if ($formHandler->handleForm($form, $request, true)){
+            return $this->redirectToRoute('profile');
+        }
+        //$form = $this->createForm(UserFormType::class, $user, ['user' => $user]);
+        //$form->handleRequest($request);
+        //if ($form->isSubmitted() && $form->isValid()) {
+        //    $em->persist($passwordHasher->userHashPassword($user));
+        //    $em->flush();
+        //    return $this->redirectToRoute('profile');
+        //}
+        return $this->render('login/register.html.twig', [
+            'title' => 'Mettre à jour son profil',
+            'form' => $form,
+        ]);
 
     }
 }

@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block main %}
+    <h2>{{ title }}</h2>
+    <table>
+        <tr>
+            <th>Prénom :</th>
+            <td>{{ user.firstName }}</td>
+        </tr>
+        <tr>
+            <th>Nom :</th>
+            <td>{{ user.lastName }}</td>
+        </tr>
+        <tr>
+            <th>Email :</th>
+            <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+            <th>Portable:</th>
+            <td>{{ user.phoneNumber }}</td>
+        </tr>
+    </table>
+    <hr>
+    <a href="{{ path('editProfile', {'id': user.id}) }}">Mettre à jour</a>
+    <hr>
+    <a href="{{ path('dashboard') }}">Revenir au tableau de bord</a>
+{% endblock %}

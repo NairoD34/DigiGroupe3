@@ -14,8 +14,12 @@
     <body>
         <header>
             {% block nav %}
-                <a href="{{ path('dashboard') }}">Dashboard</a>
-                <a href="{{ path('register') }}">Inscription</a>
+                {% if (is_granted('IS_AUTHENTICATED_FULLY')) %}
+                    <a href="{{ path('dashboard') }}">Dashboard</a>
+                    <a href="{{ path('profile') }}">Mon profil</a>
+                    <a href="{{ path('logout') }}">Déconnexion</a>
+                {% else %}
+                {% endif %}
             {% endblock %}
         </header>
         {% block main %}{% endblock %}

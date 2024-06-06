@@ -18,6 +18,10 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+
+use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
 
 class UserFormType extends AbstractType
 {
@@ -68,13 +72,22 @@ class UserFormType extends AbstractType
                     'attr' => ['value' => $user->getEmail()],
                 ])
                     // TODO : Ajouter la modification de mdp !
-                //->add('password', RepeatedType::class, [
-                //    'type' => PasswordType::class,
-                //    'first_options' => ['label' => 'Mot de passe'],
-                //    'second_options' => ['label' => 'Confirmer mot de passe'],
-                //    'invalid_message' => 'fos_user.password.mismatch',
-                //    'required' => true,
-                //])
+                ->add('password', PasswordType::class, [
+                    'label' => 'Ancien mot de passe',
+                    'hash_property_path' => 'password',
+                    'mapped' => false,
+                    'constraints' => [
+                        new SecurityAssert\UserPassword(message: 'Ancien mot de passe incorrect.'),
+                    ]
+                ])
+                ->add('password', RepeatedType::class, [
+                    'type' => PasswordType::class,
+                    'first_options' => ['label' => 'Nouveau mot de passe'],
+                    'second_options' => ['label' => 'Confirmer votre nouveau mot de passe'],
+                    'invalid_message' => 'Mot de passe ne sont pas identitique',
+                    'required' => true,
+                    'options' => ['attr' => ['class' => 'password-field']],
+                ])
                 ->add('firstName', TextType::class,[
                     'label' => 'Prénom',
                     'attr' => ['value' => $user->getFirstName()],
