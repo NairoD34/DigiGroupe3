@@ -24,3 +24,4 @@
 /assets/vendor/
 ###< symfony/asset-mapper ###
 .phpactor.json
+.idea/dataSources.xml
