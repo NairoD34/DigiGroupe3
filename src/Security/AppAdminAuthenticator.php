@@ -57,7 +57,7 @@ class AppAdminAuthenticator extends AbstractLoginFormAuthenticator
         if ($this->security->isGranted('ROLE_ADMIN')) {
             return new RedirectResponse($this->urlGenerator->generate('app_home'));
         }
-        return new RedirectResponse($this->urlGenerator->generate('user/dashboard'));
+        return new RedirectResponse($this->urlGenerator->generate('dashboard'));
     }
 
     protected function getLoginUrl(Request $request): string
