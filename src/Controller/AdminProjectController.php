@@ -48,13 +48,12 @@ class AdminProjectController extends AbstractController
             if(date_diff($form['startDate']->getData(),$currentDate)->format("%R%a") < 0 ){
                 $stateOfProject = $stateOfProjectRepo->findOneByid(1);
             }
-            if(date_diff($form['startDate']->getData(),$currentDate)->format("%R%a") > 0  && date_diff($form['endDate']->getData(),$currentDate)->format("%R%a") < 0  ){
+            else if(date_diff($form['startDate']->getData(),$currentDate)->format("%R%a") > 0  && date_diff($form['endDate']->getData(),$currentDate)->format("%R%a") < 0  ){
                 $stateOfProject = $stateOfProjectRepo->findOneByid(2);
             }
-            if(date_diff($form['endDate']->getData(),$currentDate)->format("%R%a") > 0 ){
+            else if(date_diff($form['endDate']->getData(),$currentDate)->format("%R%a") > 0 ){
                 $stateOfProject = $stateOfProjectRepo->findOneByid(3);
             }
-            dd(date_diff($form['startDate']->getData(),$currentDate)->format("%R%a"),date_diff($form['endDate']->getData(),$currentDate)->format("%R%a"),date_diff($form['startDate']->getData(),$currentDate)->format("%R%a") > 0  && date_diff($form['endDate']->getData(),$currentDate)->format("%a") < 0  );
             $project->setStateOfProject($stateOfProject);
             $em->persist($project);
             $em->flush();
