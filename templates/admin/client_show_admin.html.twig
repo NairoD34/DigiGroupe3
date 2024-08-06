@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block main %}
+    <h2>{{ title }}</h2>
+             <div class="row mt-4">
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body ">
+                            <strong>Nom de l'entreprise:</strong> {{ client.company }} <br>
+                            <strong>Prénom du contact:</strong> {{ client.firstName }} <br>
+                            <strong>Nom du contact:</strong>  {{ client.lastName }} <br>
+                            <strong>Numéro de téléphone du contact:</strong>  {{ client.phoneNumber }} <br>
+                            <strong>Adresse e-mail du contact:</strong>  {{ client.mail }} <br>
+                            <strong>Adresse de l'entreprise:</strong>  {{ client.adress }} <br>
+                            <strong>Code postal:</strong>  {{ client.ZIPcode }} <br>
+                            <strong>Ville:</strong>  {{ client.city }} <br>
+                            <strong>SIREN:</strong>  {{ client.SIREN }} <br>
+                            <strong>SIRET:</strong>  {{ client.SIRET }} <br>
+                            <div class="card border p-3 bg-light d-flex flex-wrap align-items-center m-2" style="width: 27rem; height: 27rem;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<a href="{{ path('app_update_client', {'id': client.id})}}">Modifier ce client</a>
+<a href="{{ path('app_delete_client', {'id': client.id})}}">Supprimer ce client</a>           
+<a href="{{ path('app_client_list_admin') }}" class="btn btn-secondary">Retour</a>            
+{% endblock %}

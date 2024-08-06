@@ -4,5 +4,19 @@
 {% block main %}
     <h2>{{ title }}</h2>
     Connecté (admin) en tant que : <strong>{{ user.email }}</strong>,  <a href="{{ path('logout') }}">Déconnexion</a>
+    <a href="{{ path('app_client_list_admin')}}"><h3>Clients</h3></a>
+    <a href="{{ path('app_new_client')}}">Créer un nouveau client</a>
+
+    {% for item in clients %}
+    <a href="{{ path('app_client_show_admin', { 'id': item.id })}}">{{item.company}}</a>
+    
+
+    {% endfor %}
+    
+    <h3>Projets</h3>
+   {# {% if (projet)%}
+    {% else %}
+    <a href="{{ path('app_new_projet')}}">Créer un nouveau projet</a>
+    {% endif %}#}
 
 {% endblock %}

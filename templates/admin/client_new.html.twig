@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block main %}
+   <section class="section-info-client">
+    <div class="container  mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8"> <!-- Utilisez col-md-8 pour une largeur maximale de 600px sur les écrans moyens et plus petits -->
+            
+                <h2 class="text-center mb-4">{{ title }}</h2>
+                {{ form_start(form, {'attr': {'class': 'mb-4 p-4 d-flex flex-column form-user align-items-center justify-content-center'}}) }}
+                    {{ form_label(form.company, "Nom de l'entreprise", {'label_attr': {'class': 'mb-2'}}) }}
+                    {{ form_widget(form.company, {'attr': {'class': 'w-75 p-2 my-3'}}) }}
+
+                    {{ form_label(form.firstName, 'Prénom du contact', {'label_attr': {'class': 'mb-2'}}) }}
+                    {{ form_widget(form.firstName, {'attr': {'class': 'w-75 p-2 my-3'}}) }}
+
+                    {{ form_label(form.lastName, 'Nom du contact', {'label_attr': {'class': 'mb-2'}}) }}
+                    {{ form_widget(form.lastName, {'attr': {'class': 'w-75 p-2 my-3'}}) }}
+
+                    {{ form_label(form.phoneNumber, 'Numéro de téléphone', {'label_attr': {'class': 'mb-2'}}) }}
+                    {{ form_widget(form.phoneNumber, {'attr': {'class': 'w-75 p-2 my-3'}}) }}
+
+                    {{ form_label(form.mail, 'Adresse e-mail', {'label_attr': {'class': 'mb-2'}}) }}
+                    {{ form_widget(form.mail, {'attr': {'class': 'w-75 p-2 my-3'}}) }}
+
+                    {{ form_label(form.adress, 'Adresse postale', {'label_attr': {'class': 'mb-2'}}) }}
+                    {{ form_widget(form.adress, {'attr': {'class': 'w-75 p-2 my-3'}}) }}
+
+                    {{ form_label(form.ZIPcode, 'Code Postal', {'label_attr': {'class': 'mb-2'}}) }}
+                    {{ form_widget(form.ZIPcode, {'attr': {'class': 'w-75 p-2 my-3'}}) }}
+
+                    {{ form_label(form.city, 'Ville', {'label_attr': {'class': 'mb-2'}}) }}
+                    {{ form_widget(form.city, {'attr': {'class': 'w-75 p-2 my-3'}}) }}
+
+                    {{ form_label(form.SIREN, 'Siren', {'label_attr': {'class': 'mb-2'}}) }}
+                    {{ form_widget(form.SIREN, {'attr': {'class': 'w-75 p-2 my-3'}}) }}
+
+                    {{ form_label(form.SIRET, 'Siret', {'label_attr': {'class': 'mb-2'}}) }}
+                    {{ form_widget(form.SIRET, {'attr': {'class': 'w-75 p-2 my-3'}}) }}
+
+                    <div class="text-center my-3"> <!-- Centrer le bouton d'envoi -->
+                        <input type='submit' name='créer' class="button-nl">
+                    </div>
+
+                {{ form_end(form) }}
+                 <a href="{{ path('app_client_list_admin') }}" class="btn btn-secondary">Retour</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

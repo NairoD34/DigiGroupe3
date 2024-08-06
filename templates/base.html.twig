@@ -18,8 +18,13 @@
                     <a href="{{ path('dashboard') }}">Dashboard</a>
                     <a href="{{ path('profile') }}">Mon profil</a>
                     <a href="{{ path('logout') }}">Déconnexion</a>
+                    {% if (is_granted("ROLE_ADMIN")) %}
+                    <a href="{{ path('app_home') }}">Admin dashboard</a>
+                {% endif %}
+
                 {% else %}
                 {% endif %}
+
             {% endblock %}
         </header>
         {% block main %}{% endblock %}
