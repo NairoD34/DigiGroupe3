@@ -55,7 +55,7 @@ class AppAdminAuthenticator extends AbstractLoginFormAuthenticator
         }
         $user = $token->getUser();
         if ($this->security->isGranted('ROLE_ADMIN')) {
-            return new RedirectResponse($this->urlGenerator->generate('home'));
+            return new RedirectResponse($this->urlGenerator->generate('app_home'));
         }
         return new RedirectResponse($this->urlGenerator->generate('dashboard'));
     }

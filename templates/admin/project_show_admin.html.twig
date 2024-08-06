@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block main %}
+    <h2>{{ title }}</h2>
+             <div class="row mt-4">
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body ">
+                            <strong>Nom du projet:</strong> {{ project.name }} <br>
+                            <strong>Description du projet:</strong> {{ project.description }} <br>
+                            <strong>Client concerné par le projet:</strong>  {{ project.client.company }} <br>
+                            <strong>Manager en charge du projet:</strong>  {{ project.manages.firstName }} {{ project.manages.lastName }}<br>
+                            <strong>Date de début du projet:</strong>  {{ project.startDate|date('d-m-Y') }} <br>
+                            <strong>Date de fin du projet:</strong>  {{ project.endDate|date('d-m-Y') }} <br>
+                            
+                            <div class="card border p-3 bg-light d-flex flex-wrap align-items-center m-2" style="width: 27rem; height: 27rem;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<a href="{{ path('app_update_project', {'id': project.id})}}">Modifier ce projet</a>
+<a href="{{ path('app_delete_project', {'id': project.id})}}">Supprimer ce projet</a>           
+<a href="{{ path('app_project_list_admin') }}" class="btn btn-secondary">Retour</a>            
+{% endblock %}
