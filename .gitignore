@@ -25,3 +25,5 @@
 ###< symfony/asset-mapper ###
 .phpactor.json
 .idea/dataSources.xml
+.idea
+.idea/Digi-Groupe-3.iml
