@@ -25,5 +25,14 @@
         </tr>
 
     {% endfor %}
+    <a href="{{ path('app_user_list_admin')}}"><h3>Utilisateurs</h3></a>
+    {% for item in users %}
+    <a href="{{ path('app_user_show_admin', { 'id': item.id })}}">{{item.firstName}} {{item.lastName}}</a>
+    {% else %}
+     <tr>
+            <td colspan="5">Aucun enregistrement</td>
+        </tr>
+
+    {% endfor %}
 
 {% endblock %}

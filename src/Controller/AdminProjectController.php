@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Constraints\Date;
 #[Route('admin/')]
 class AdminProjectController extends AbstractController
 {
-    #[Route('produit', name: 'app_project')]
+    #[Route('project', name: 'app_project')]
     public function index(ProjectRepository $projectRepo): Response
     {
         $projects = $projectRepo->searchNew();
