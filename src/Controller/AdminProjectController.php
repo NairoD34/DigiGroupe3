@@ -25,7 +25,7 @@ class AdminProjectController extends AbstractController
         $projects = $projectRepo->searchNew();
         return $this->render('project/index.html.twig', [
             'controller_name' => 'ProjectController',
-            'produits' => $projects
+            'projects' => $projects
         ]);
     }
     #[Route('new_project', name: 'app_new_project')]

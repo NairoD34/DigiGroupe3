@@ -9,6 +9,9 @@ use App\Entity\User;
 use Doctrine\ORM\Mapping\Entity;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\ChoiceList\ChoiceList;
+use Symfony\Component\Form\ChoiceList\Factory\Cache\ChoiceAttr;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -30,6 +33,13 @@ class AdminProjectFormType extends AbstractType
                 'class' => User::class,
                 'choice_label' => 'lastName',
             ])
+            ->add('participates',EntityType::class,[
+                'class' => User::class,
+                'label' => 'lastname',
+                'multiple' => true,
+                'expanded' => true,
+            ])
+            
             ->add('startDate',DateType::class,[
                 'format' => 'dd-MM-yyyy',
 

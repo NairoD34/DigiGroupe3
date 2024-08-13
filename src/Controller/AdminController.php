@@ -40,6 +40,7 @@ class AdminController extends AbstractController
 
         $user = $security->getUser();
         $client = $clientRepo->searchByName($request->query->get('company', ''));
+        $project = $projectRepo->searchByName($request->query->get('name', ''));
 
         return $this->render('admin/home.html.twig', [
             'title' => 'Dashboard Admin',
