@@ -3,7 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Client;
+use App\Entity\Project;
+use App\Entity\User;
 use App\Repository\ClientRepository;
+use App\Repository\ProjectRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,6 +29,10 @@ class AdminController extends AbstractController
         Security $security,
         Client $client,
         ClientRepository $clientRepo,
+        Project $project,
+        User $users,
+        ProjectRepository $projectRepo,
+        UserRepository $userRepo,
         Request $request
 
     ) : Response
@@ -36,11 +44,15 @@ class AdminController extends AbstractController
 
         $user = $security->getUser();
         $client = $clientRepo->searchByName($request->query->get('company', ''));
+        $project = $projectRepo->searchByName($request->query->get('name', ''));
+        $users = $userRepo->searchByName($request->query->get('lastName', ''));
 
         return $this->render('admin/home.html.twig', [
             'title' => 'Dashboard Admin',
             'user' => $user,
-            'clients' =>$client
+            'clients' =>$client,
+            'projects' => $project,
+            'users' => $users,
         ]);
     }
 

@@ -20,6 +20,8 @@
                     <a href="{{ path('logout') }}">Déconnexion</a>
                     {% if (is_granted("ROLE_ADMIN")) %}
                     <a href="{{ path('app_home') }}">Admin dashboard</a>
+                    <a href="{{ path('app_user_list_admin') }}">Liste des utilisateurs</a>
+                    
                 {% endif %}
 
                 {% else %}

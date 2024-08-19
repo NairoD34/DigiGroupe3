@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block main %}
+   <section class="section-info-project">
+    <div class="container  mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8"> <!-- Utilisez col-md-8 pour une largeur maximale de 600px sur les écrans moyens et plus petits -->
+            
+                <h2 class="text-center mb-4">{{ title }}</h2>
+                {{ form_start(form, {'attr': {'class': 'mb-4 p-4 d-flex flex-column form-user align-items-center justify-content-center'}}) }}
+                    {{ form_label(form.name, "Nom du projet", {'label_attr': {'class': 'mb-2'}}) }}
+                    {{ form_widget(form.name, {'attr': {'class': 'w-75 p-2 my-3'}}) }}
+
+                    {{ form_label(form.description, 'Description du projet', {'label_attr': {'class': 'mb-2'}}) }}
+                    {{ form_widget(form.description, {'attr': {'class': 'w-75 p-2 my-3'}}) }}
+
+                    {{ form_label(form.Client, 'Client concerné par le projet', {'label_attr': {'class': 'mb-2'}}) }}
+                    {{ form_widget(form.Client, {'attr': {'class': 'w-75 p-2 my-3'}}) }}
+
+                    {{ form_label(form.manages, 'Manager en charge du projet', {'label_attr': {'class': 'mb-2'}}) }}
+                    {{ form_widget(form.manages, {'attr': {'class': 'w-75 p-2 my-3'}}) }}
+
+                    {{ form_label(form.participates, 'Ajoutez des participants', {'label_attr': {'class': 'mb-2'}}) }}
+                    {{ form_widget(form.participates, {'attr': {'class': 'w-75 p-2 my-3'}}) }}
+
+                    {{ form_label(form.startDate, 'Date de commencement du projet', {'label_attr': {'class': 'mb-2'}}) }}
+                    {{ form_widget(form.startDate, {'attr': {'class': 'w-75 p-2 my-3'}}) }}
+
+                    {{ form_label(form.endDate, 'Date de fin du projet', {'label_attr': {'class': 'mb-2'}}) }}
+                    {{ form_widget(form.endDate, {'attr': {'class': 'w-75 p-2 my-3'}}) }}
+
+                    <div class="text-center my-3"> <!-- Centrer le bouton d'envoi -->
+                        <input type='submit' name='créer' class="button-nl">
+                    </div>
+
+                {{ form_end(form) }}
+                 <a href="{{ path('app_project_list_admin') }}" class="btn btn-secondary">Retour</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

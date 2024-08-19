@@ -9,14 +9,30 @@
 
     {% for item in clients %}
     <a href="{{ path('app_client_show_admin', { 'id': item.id })}}">{{item.company}}</a>
-    
-
+    {% else %}
+     <tr>
+            <td colspan="5">Aucun enregistrement</td>
+        </tr>
     {% endfor %}
     
-    <h3>Projets</h3>
-   {# {% if (projet)%}
+    <a href="{{ path('app_project_list_admin')}}"><h3>Projets</h3></a>
+    <a href="{{ path('app_new_project')}}">Créer un nouveau projet</a>
+   {% for item in projects %}
+    <a href="{{ path('app_project_show_admin', { 'id': item.id })}}">{{item.name}}</a>
     {% else %}
-    <a href="{{ path('app_new_projet')}}">Créer un nouveau projet</a>
-    {% endif %}#}
+     <tr>
+            <td colspan="5">Aucun enregistrement</td>
+        </tr>
+
+    {% endfor %}
+    <a href="{{ path('app_user_list_admin')}}"><h3>Utilisateurs</h3></a>
+    {% for item in users %}
+    <a href="{{ path('app_user_show_admin', { 'id': item.id })}}">{{item.firstName}} {{item.lastName}}</a>
+    {% else %}
+     <tr>
+            <td colspan="5">Aucun enregistrement</td>
+        </tr>
+
+    {% endfor %}
 
 {% endblock %}

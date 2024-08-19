@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block main %}
+    <h2>{{ title }}</h2>
+    {% if is_granted('ROLE_ADMIN') %}
+    <h3><a href="{{ path('app_new_project') }}">Ajouter un projet</a></h3>
+    {% endif %}
+    <div class="d-flex flex-wrap">
+    {% for item in project %}
+        <tr>
+            <div class="card border p-3 bg-light d-flex flex-wrap align-items-center m-2 justify-content-center" style="width: 25rem; ">
+                <div class="card-body d-flex align-items-center">
+                <a href ="{{ path('app_project_show_admin', { 'id': item.id })}}" class="card-text text-decoration-none">
+                    <h5 class="card-title text-center">{{ item.name }}</h5>
+                    <p class="card-text text-center">
+                    <ul>
+                    <li>Description: {{ item.description }}</li>
+                    <li>Entreprise concerné: {{ item.client.company }}</li>
+                    <li>Avancement du projet: {{ item.stateOfProject.label}}</li>
+                    <li>Date de début: {{ item.startDate|date('d-m-Y') }}</li>
+                    <li>Date de fin: {{ item.endDate|date('d-m-Y') }}</li>
+                    </ul>
+                    </p>
+                </div>
+                </a>
+                <td><a href="{{ path('app_update_project', { 'id': item.id })}}">Mettre à jour</a></td>
+                <td>{{ include('admin/project_delete.html.twig', { 'id': item.id })}}</td>
+            </div>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="5">Aucun enregistrement</td>
+        </tr>
+    {% endfor %}
+    </table>
+    </div>
+   <a href="{{ path('app_home') }}" class="btn btn-secondary">Retour</a>
+{% endblock %}
