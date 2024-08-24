@@ -16,28 +16,23 @@ class StateOfProjectRepository extends ServiceEntityRepository
         parent::__construct($registry, StateOfProject::class);
     }
 
-    //    /**
-    //     * @return StateOfProject[] Returns an array of StateOfProject objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('s')
-    //            ->andWhere('s.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('s.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
 
-    //    public function findOneBySomeField($value): ?StateOfProject
-    //    {
-    //        return $this->createQueryBuilder('s')
-    //            ->andWhere('s.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+        public function findByid($value): array
+        {
+            return $this->createQueryBuilder('p')
+                ->andWhere('p.id = :val')
+                ->setParameter('val', $value)
+                ->getQuery()
+                ->getResult()
+           ;
+        }
+        public function findOneById($value): ?StateOfProject
+        {
+            return $this->createQueryBuilder('c')
+                ->andWhere('c.id = :val')
+                ->setParameter('val', $value)
+                ->getQuery()
+                ->getOneOrNullResult()
+            ;
+        }
 }

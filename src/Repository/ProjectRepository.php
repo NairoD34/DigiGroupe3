@@ -15,6 +15,15 @@ class ProjectRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Project::class);
     }
+    public function searchByName(string $name): ?array
+    {
+        return $this->createQueryBuilder('s')
+            ->where('s.name like :val')
+            ->setParameter('val', '%' . $name . '%')
+            ->getQuery()
+            ->getResult();
+    }
+
 
     //    /**
     //     * @return Project[] Returns an array of Project objects

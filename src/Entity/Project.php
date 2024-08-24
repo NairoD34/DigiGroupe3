@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+
 #[ORM\Entity(repositoryClass: ProjectRepository::class)]
 class Project
 {
@@ -38,7 +39,7 @@ class Project
     #[ORM\JoinColumn(nullable: false)]
     private ?User $manages = null;
 
-    #[ORM\ManyToOne(inversedBy: 'project')]
+    #[ORM\ManyToOne(inversedBy: 'project', cascade:["persist"])]
     #[ORM\JoinColumn(nullable: false)]
     private ?StateOfProject $stateOfProject = null;
 
@@ -55,6 +56,7 @@ class Project
     {
         $this->task = new ArrayCollection();
         $this->participates = new ArrayCollection();
+
     }
 
     public function getId(): ?int

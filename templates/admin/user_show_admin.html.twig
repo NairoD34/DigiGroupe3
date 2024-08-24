@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block main %}
+    <h2>{{ title }}</h2>
+             <div class="row mt-4">
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body ">
+                            <strong>Nom:</strong> {{ user.lastName }} <br>
+                            <strong>Prénom:</strong> {{ user.firstName }} <br>
+                            <strong>Numéro de téléphone:</strong>  0{{ user.phoneNumber }} <br>
+                            <strong>Adresse e-mail:</strong>  {{ user.email }} <br>
+                            <strong>Role de l'utilisateur:</strong>  {{ user.job }} <br>
+                            <strong>Projet managé par l'utilisateur : </strong>
+
+                                {% for project in user.projects %}
+                                <li>{{ project.name }}</li>
+                                {% else %}
+                                <strong>Aucun projet managé</strong>
+                                {% endfor %}
+                            <strong>Projet dans lequel l'utilisateur participe : </strong>
+                                {% for participate in user.participates %}
+                                    <li>{{ participate.name }}
+                                {% else %}
+                                <strong>Aucun projet en cours</strong>
+                                {% endfor %}
+                            <div class="card border p-3 bg-light d-flex flex-wrap align-items-center m-2" style="width: 27rem; height: 27rem;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<a href="{{ path('app_update_user', {'id': user.id})}}">Modifier cet utilisateur</a>
+<a href="{{ path('app_delete_user', {'id': user.id})}}">Supprimer cet utilisateur</a>           
+<a href="{{ path('app_user_list_admin') }}" class="btn btn-secondary">Retour</a>            
+{% endblock %}
