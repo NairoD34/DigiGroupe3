@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+{% block main %}
+    <br>
+    <div class="d-flex m-3 p-3">
+    {{ form_start(form) }}
+    {{ form_end(form) }}
+    </div>
+    <br>
+    <a href="{{ path('viewProjects') }}">Retour</a>
+{% endblock %}

@@ -18,7 +18,7 @@ class AdminClientController extends AbstractController
     public function index(ClientRepository $clientRepo): Response
     {
         $clients = $clientRepo->searchNew();
-        return $this->render('client/index.html.twig', [
+        return $this->render('client/projects.html.twig', [
             'controller_name' => 'ClientController',
             'produits' => $clients
         ]);

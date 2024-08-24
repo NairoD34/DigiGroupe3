@@ -27,8 +27,7 @@ class AdminController extends AbstractController
         ClientRepository $clientRepo,
         Request $request
 
-    ) : Response
-    {
+    ): Response {
 
         if ($user = $security->getUser() === null) {
             return $this->redirectToRoute('login');
@@ -40,9 +39,7 @@ class AdminController extends AbstractController
         return $this->render('admin/home.html.twig', [
             'title' => 'Dashboard Admin',
             'user' => $user,
-            'clients' =>$client
+            'clients' => $client
         ]);
     }
-
-
 }

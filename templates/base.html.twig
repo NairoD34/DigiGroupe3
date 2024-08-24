@@ -3,7 +3,6 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Bienvenidosss{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
         {% block stylesheets %}
         {% endblock %}
 
@@ -15,14 +14,17 @@
         <header>
             {% block nav %}
                 {% if (is_granted('IS_AUTHENTICATED_FULLY')) %}
-                    <a href="{{ path('dashboard') }}">Dashboard</a>
-                    <a href="{{ path('profile') }}">Mon profil</a>
-                    <a href="{{ path('logout') }}">Déconnexion</a>
                     {% if (is_granted("ROLE_ADMIN")) %}
-                    <a href="{{ path('app_home') }}">Admin dashboard</a>
-                {% endif %}
+                        <a href="{{ path('app_home') }}">Admin dashboard</a>
+                        <a href="{{ path('viewProjects') }}">Projets</a>
+                        <a href="{{ path('profile') }}">Mon profil</a>
+                        <a href="{{ path('logout') }}">Déconnexion</a>
 
-                {% else %}
+                    {% else %}
+                        <a href="{{ path('dashboard') }}">Dashboard</a>
+                        <a href="{{ path('profile') }}">Mon profil</a>
+                        <a href="{{ path('logout') }}">Déconnexion</a>
+                    {% endif %}
                 {% endif %}
 
             {% endblock %}

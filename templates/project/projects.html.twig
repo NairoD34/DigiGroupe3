@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block main %}
+    <h2>{{ title }}</h2>
+    <a href="{{ path('addProject') }}">Ajouter un projet</a><br>
+    {% if projects is empty %}
+    Il n’y a aucun projet crée !
+    {% else %}
+    {% for project in projects %}
+        <div>
+            <ul>
+                {{ project.name }}
+                <a href="{{ path('viewProject', {id: project.id}) }}">Voir</a>
+                <a href="{{ path('editProject', {id: project.id }) }}">Modifier</a>
+                <a href="{{ path('deleteProject', {id: project.id }) }}">X</a>
+            </ul>
+        </div>
+    <h3>État des projets :</h3>
+        {% if  project.stateOfProject.label == 'Terminé' %}
+            <p style="color:green;">{{ project }} - {{ project.stateOfProject.label }}</p>
+        {% elseif project.stateOfProject.label == 'En cours' %}
+        <p style="color:red;">{{ project }} - {{ project.stateOfProject.label }}</p>
+        {% else %}
+            <p>{{ project }} - {{ project.stateOfProject.label }}</p>
+        {% endif %}
+    {% endfor %}
+    {% endif %}
+    <br>
+    <a href="{{ path('viewStatesProject') }}">Liste des états globaux</a>
+
+{% endblock %}

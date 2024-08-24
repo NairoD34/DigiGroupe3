@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block main %}
+    <h2>{{ title }}</h2>
+    <a href="{{ path('addStateProject') }}">Ajouter un état de projet</a><br>
+    {% if states is empty %}
+        Il n’y a aucun état créé !<br>
+    {% else %}
+        {% for state in states %}
+            <div>
+                <ul>
+                    État : {{ state.label }}
+                    <a href="{{ path('editStateProject', {id: state.id}) }}" style="color:orange;">Modifier</a>
+                    <a href="{{ path('deleteStateProject', {id: state.id}) }}" style="color:red;">X</a>
+                </ul>
+            </div>
+        {% endfor %}
+    {% endif %}
+    <br>
+    <a href="{{ path('viewProjects') }}">Retour aux projets</a>
+
+{% endblock %}
